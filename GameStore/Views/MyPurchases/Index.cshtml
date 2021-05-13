@@ -1,0 +1,58 @@
+﻿@model List<GameStore.Models.OrderDetail>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-main.css" />
+</head>
+
+<h2>My Purchases</h2>
+
+<html>
+
+<body>
+
+<div>
+    <div class="jumbotron">
+        <table cellpadding="5" width="800" cellspacing="0">
+
+            @foreach (var item in Model)
+            {
+                <tr height="300">
+                    <td width="40%">
+                        <div class="box">
+
+                            <img width="480" src="@Html.DisplayFor(modelItem => item.Game.ImageURL)" alt="@Html.DisplayFor(modelItem => item.Game.Title)" />
+                        </div>
+                    </td>
+                    <td>
+                        <ul>
+                            <h4><b>@Html.DisplayFor(modelItem => item.Game.Title)</b></h4>
+                        </ul>
+                        <ul><b>Order No. :</b> @Html.DisplayFor(modelItem => item.Order.OrderId)</ul>
+                        <ul><b>PurchasedOn:</b> @Html.DisplayFor(modelItem => item.Order.OrderDate)</ul><ul><b>Quantity:</b> @Html.DisplayFor(modelItem => item.Quantity)</ul><ul><b>Price:</b> @Html.DisplayFor(modelItem => item.Price)</ul>
+                        <ul>
+                            <label for="Code"><b>Activation Code:</b></label>
+
+                            <select id="Code">
+                                @foreach(var active in item.ActivationCodes)
+                                {
+                                    <option>@active.Activationcode</option>
+                                }
+                            </select>
+                            <br /><br/>
+                            <hr>
+                        </ul>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+</div>
+<br/><br/>
+</body>
+</html>

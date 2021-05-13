@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GameStore.Models.Game>
+
+@{
+    ViewData["Title"] = "Game";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-store.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body class="color">
+
+<div class="row">
+    <form class="form-inline my-2 my-lg" asp-controller="Games" asp-action="Index" method="get">
+        <input class="form-control mr-lg-2" type="text" name="SearchString" placeholder="Search Games Here">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+
+@foreach (var item in Model)
+{  <div class="row">
+       <div class="column">
+           <figure class="snip1423">
+               <img src="@Html.DisplayFor(modelItem => item.ImageURL)" alt="@Html.DisplayFor(modelItem => item.Title)" />
+               <figcaption>
+                   <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                   <p>@Html.DisplayFor(modelItem => item.Genre.Id)</p>
+                   <div class="price">
+                       $@Html.DisplayFor(modelItem => item.Price)
+                   </div>
+               </figcaption><i class="fa fa-arrow-circle-right"></i>
+               <a href="@Url.Action("Details", new {Id = item.Id})"></a>
+
+           </figure>
+       </div>
+   </div>
+
+    <br />
+    <br />
+}
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</body>
+</html>

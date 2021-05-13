@@ -1,0 +1,108 @@
+﻿@model GameStore.Models.User
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-login.css" />
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+
+        .btn-group {
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+
+<body class="background">
+    <section class="login-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 login-sec">
+                    <h2>Login Here</h2>
+                    @using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
+                    {
+                        <form class="login-form">
+                            <br /><br /><br />
+                            <!-- Username Input -->
+                            <div class="form-group">
+                                <div>
+                                    @Html.LabelFor(model => model.Username)
+                                </div>
+                                <div>
+                                    <label id="uname">@Html.EditorFor(model => model.Username)</label>
+                                    @Html.ValidationMessageFor(model => model.Username)
+                                </div>
+                                <div></div>
+                            </div>
+                            <!-- Password Input -->
+                            <div class="form-group">
+                                <div>
+                                    @Html.LabelFor(model => model.Password)
+                                </div>
+                                <div>
+                                    <label id="pwd">@Html.EditorFor(model => model.Password)</label>
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                </div>
+                                <div></div>
+                            </div>
+                            <div colspan="2">
+                                <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+                            </div>
+                            <div></div>
+                            <div class="btn-group">
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-login float-right" id="loginBtn">Submit</button>
+                                <button type="reset" class="btn btn-login float-right" id="resetBtn">Clear</button>
+                            </div>
+
+                        </form>
+
+
+                    }
+
+                </div>
+                <div class="col-md-8 banner-sec">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img class="d-block img-fluid" src="/Product_Images/GTAVForBanner.png" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block img-fluid" src="/Product_Images/RedDeadRedemption2ForBanner.png" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block img-fluid" src="/Product_Images/NoMan'sSkyForBanner.png" alt="First slide">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+

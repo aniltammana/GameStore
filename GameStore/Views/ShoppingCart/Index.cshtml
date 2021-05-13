@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+}
+@model List<GameStore.Models.Cart>
+
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".RemoveLink").click(function () {
+            // Get the id from the link
+            var recordToDelete = $(this).attr("data-id");
+            if (recordToDelete != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/RemoveFromCart", { "id": recordToDelete },
+                    function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+                        $('#cart-total').text(data.CartTotal);
+                        $('#update-message').text(data.Message);
+                        $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    });
+            }
+        });
+    });
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-cart.css" />
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card shopping-cart">
+            <div class="card-header bg-#696969 text-#DCDCDC">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                Shopping cart @ViewData["Count"]
+                <a asp-area="" asp-controller="Games" asp-action="Index" class="btn btn-outline-info btn-sm pull-right">Continue shopping</a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="card-body">
+                <!-- PRODUCT -->
+                @foreach (var cartItems in Model)
+                {
+                    <div class="row">
+
+                        <div class="col-12 col-sm-12 col-md-2 text-center">
+                            <img class="img-responsive" src="@Html.DisplayFor(modelItem => cartItems.Game.ImageURL)" alt="@Html.DisplayFor(modelItem => cartItems.Game.Title)" width="120" height="80">
+                        </div>
+                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                            <h4 class="product-name"><strong>@Html.DisplayFor(modelItem => cartItems.Game.Title)</strong></h4>
+                        </div>
+                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                <h6><strong>@Html.DisplayFor(modelItem => cartItems.Game.Price)<span class="text-muted">x</span></strong></h6>
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-4">
+                                <div class="quantity">
+                                    <input type="number" step="1" max="99" min="1" value="@Html.DisplayFor(modelItem => cartItems.Quantity)" title="Qty" class="qty"
+                                           size="4">
+                                </div>
+                            </div>
+                            <div class="col-2 col-sm-2 col-md-2 text-right">
+                                <span class="badge badge-light">
+                                    @Html.ActionLink("Add", "AddProduct",
+                                        "ShoppingCart", new { id = cartItems.GameId })
+                                </span>
+                                <br />
+                                <span class="badge badge-light">
+                                    @Html.ActionLink("Reduce", "ReduceProduct",
+                                        "ShoppingCart", new { id = cartItems.GameId })
+                                </span>
+                                <br />
+                                <span class="badge badge-light">
+                                    @Html.ActionLink("Remove", "RemoveFromCart",
+                                        "ShoppingCart", new { id = cartItems.GameId })
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                }
+                <!-- END PRODUCT -->
+
+                <div class="pull-right" style="margin: 5px">
+                    Total price: <b>$@ViewData["Total"]</b>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="col-6">
+                    <p>
+                        @Html.ActionLink("Empty Cart", "EmptyCart",
+                            "ShoppingCart")
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="pull-right" style="margin: 10px">
+            <button type="button" class="btn btn-success" onclick="@("window.location.href='" + @Url.Action("Index", "Checkout") + "'");">
+                Checkout <span class="glyphicon glyphicon-play"></span>
+            </button>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://use.fontawesome.com/c560c025cf.js"></script>
+
+</body>
+</html>

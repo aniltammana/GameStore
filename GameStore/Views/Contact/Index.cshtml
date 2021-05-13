@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-main.css" />
+</head>
+
+<body>
+    <h2>Contact Us</h2>
+    
+    <form>
+        <fieldset>
+            <legend>Legend</legend>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Enter your preferred email address to contact you.</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleSelect1">Please select your issue.</label>
+                <select class="form-control" id="exampleSelect1">
+                    <option>General inquiries on the software</option>
+                    <option>Technical issues</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleTextarea">Please describe your issue.</label>
+                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputFile">Screenshot</label>
+                <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                <small id="fileHelp" class="form-text text-muted">Description on file upload.</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+    </form>
+</body>
+</html>

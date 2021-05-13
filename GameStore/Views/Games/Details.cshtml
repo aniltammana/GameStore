@@ -1,0 +1,43 @@
+﻿@model GameStore.Models.Game
+
+@{
+    ViewBag.Title = "Game - " + Model.Title;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-main.css" />
+</head>
+
+<body>
+    <br />
+    <div class="card mb-3">
+        <h3 class="card-header">Game Details</h3>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <h6 class="card-subtitle text-muted">@Model.Genre.Name</h6>
+        </div>
+        <video id="videoplayer" src="@Url.Content(Model.TrailerURL)" controls width="100%" height="auto"></video>
+        <div class="card-body">
+            <p class="card-text">@Model.Desc</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4>$ @String.Format("{0:F}", Model.Price)</h4></li>
+        </ul>
+        <div class="card-body">
+            <p class="button">
+                @Html.ActionLink("Add to cart", "AddToCart",
+                    "ShoppingCart", new { id = Model.Id }, "")
+            </p>
+            <a class="button" asp-area="" asp-controller="Games" asp-action="Index">
+                Back to Store Page
+            </a>
+        </div>
+        <div class="card-footer text-muted">
+            Game Store
+        </div>
+    </div>
+    <br />
+    <br />
+</body>

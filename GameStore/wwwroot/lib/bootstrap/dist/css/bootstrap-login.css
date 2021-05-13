@@ -1,0 +1,79 @@
+﻿@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
+.background {
+    background: #ffff;
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-bottom: auto;
+}
+
+.banner-sec {
+    width: 100%;
+    height: auto;
+    max-width: 65vw;
+    postion: absolute;
+    top: 22px;
+    padding: 0;
+}
+.container {
+    width: 100%;
+    height: auto;
+    max-width: 65vw;
+    background: transparent;
+    border-radius: 20px;
+}
+
+.carousel-inner {
+    width: 100%;
+    height: auto;
+    max-width: 65vw;
+    postion: absolute;
+    bottom: 10px;
+    background-attachment: fixed;
+}
+
+.login-sec .copy-text {
+    position: absolute;
+    width: 80%;
+    top: 480px;
+    left: 30px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.login-sec .copy-text i {
+    color: #FEB58A;
+}
+
+.login-sec .copy-text a {
+    color: #E36262;
+}
+
+.login-sec h2 {
+    margin-top: 100px;
+    font-weight: 800;
+    font-size: 30px;
+    color: #DE6262;
+}
+
+.login-sec h2:after {
+    content: " ";
+    position: absolute;
+    left: 50;
+    width: 100px;
+    height: 5px;
+    background: #FEB58A;
+    display: block;
+    margin-top: 20px;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.btn-login {
+    background: #DE6262;
+    color: #fff;
+    font-weight: 600;
+}
